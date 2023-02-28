@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shopping Mall List</title>
+    <link rel="stylesheet" href="/css/board_list.css">
+  </head>
+  <body>
+    <header>
+      <div class="inner_head">
+        <span><h2>🥕 근당마켓</h2></span>
+        <nav>
+          <!-- Navigation links -->
+          <a href="#"></a>로그인</a>
+          <a href="#">중고거래</a>
+          <a href="#">채팅목록</a>
+        </nav>
+      </div>
+    </header>
+    <div class="head-title">
+      <h2>중고거래 게시판</h2>
+    </div>
+    <div class="upper">
+      <a href="#" class='upload'>내 물건 팔기
+      </a>
+    </div>
+    <div class="container">
+      <!-- Shopping mall item with thumbnail -->
+      <div class="items" th:each="item:${itemList}">
+        <a class="item-link" href="#">
+        <img src="https://via.placeholder.com/150x150" alt="Thumbnail" class="thumbnail">
+        <h3>[[${items.name}]]</h3>
+        <p>[[${items.price}]]원</p>
+        <p>[[${items.view}]]</p>
+        </a>
+      </div>
+      <!-- Add more shopping mall items here -->
+      
+    </div>
+  </body>
+</html>

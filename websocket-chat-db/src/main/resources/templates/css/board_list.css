@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+    *{
+      font-family: 'GmarketSansMedium';
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+    /* Define a flex container */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Define a flex item */
+    .item {
+      width: 200px;
+      margin: 10px;
+      text-align: center;
+    }
+    
+    /* Define thumbnail style */
+    .thumbnail {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    /* Define header style */
+    header {
+      background-color: #70c56d;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    .inner_head{
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin: auto;
+    }
+   @media screen and (min-width: 768px){
+    .inner_head{
+      max-width: 100rem;
+      height:3rem;
+    }
+  }
+    
+    /* Define navigation bar style */
+    nav {
+      padding: 10px;
+    }
+    
+    /* Define navigation link style */
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    /* Define active navigation link style */
+    nav a:hover {
+      background-color: #ffffff77;
+      color: white;
+    }
+    .item-link{
+      text-decoration: none;
+      color: #212529;
+    }
+    .upper {
+      width: 980px;
+      margin: 0 auto;
+      text-align: right;
+      margin-bottom: 1em;
+  }
+  .head-title {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.6px;
+      text-align: center;
+      color: #212529;
+      margin: 40px 0;
+  }
+  .upload{
+    display: inline-block;
+    margin: 0.75rem 0 0;
+    background: #70c56d;
+    color: #212529;
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.25rem;
+    border-color: #70c56d;
+    text-decoration: none;
+}
+.upload:hover{
+  background: #a1e79f;
+}
