@@ -1,0 +1,212 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+    *{
+      font-family: 'GmarketSansMedium';
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Define header style */
+ header {
+  background-color: #70c56d;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+.inner_head{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: auto;
+}
+@media screen and (min-width: 768px){
+.inner_head{
+  max-width: 100rem;
+  height:3rem;
+}
+}
+.head-title {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: #212529;
+  margin: 40px 0;
+}
+/* Define navigation bar style */
+nav {
+  padding: 10px;
+}
+
+/* Define navigation link style */
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Define active navigation link style */
+nav a:hover {
+  background-color: #ffffff77;
+  color: white;
+}
+#upload-form{
+  max-height: 600px;
+}
+#files{
+  position: absolute;
+  bottom: 0;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  height : 250px;
+  position: relative;
+  margin: auto;
+  text-align: center;
+  
+}
+.slide-img img
+{
+  width:100%;
+  border-radius: 10px;
+}
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+height:300px;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.product-container{
+  margin: 3rem 0;
+}
+.product-info{
+  text-align: center;
+  margin-top: 2rem;
+  margin: 0 auto;
+  position:relative;
+}
+
+.product-title{
+  text-align: center;
+  width: 400px;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  position:relative;
+}
+.product-description{
+  text-align: center;
+  width: 400px;
+  height: 40px;
+  font-size: 1rem;
+  padding: 3rem;
+}
+.product-price{
+  text-align: center;
+  width: 400px;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  position:relative;
+}
+.chat-link{
+  font-size: 1.5rem;
+  font-style: oblique;
+  display: inline-block;
+  margin: 1rem 0 0;
+  background: #70c56d;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 0.25rem;
+  border-color: #70c56d;
+  text-decoration: none;
+}
+.chat-link:hover{
+background: #a1e79f;
+color: #212529;
+}

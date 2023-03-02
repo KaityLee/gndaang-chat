@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kt.java.board.MarketMapper"> 
+<mapper namespace="com.kt.java.board.BoardMapper"> 
 
 	<insert id="addsaleform" parameterType="com.kt.java.board.vo.Items">
 	 INSERT INTO items(gid,seller_id,name,price,description,view,created_at)
@@ -16,5 +16,10 @@
 				</foreach>
 			) t
 	</update>
+
+	<select id="getItem" parameterType="Integer"
+		resultType="com.kt.java.board.vo.Items">
+		SELECT * FROM items WHERE gid=#{gid}
+	</select>
 
 </mapper>

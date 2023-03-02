@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Product Detail with Image Slide</title>
+    <link rel="stylesheet" href="/css/upload_form.css">
+    
+  </head>
+  <body>
+    <header>
+      <div class="inner_head">
+        <span><h2>🥕 근당마켓</h2></span>
+        <nav>
+          <!-- Navigation links -->
+          <a href="#">로그인</a>
+          <a href="#">중고거래</a>
+          <a href="#">채팅목록</a>
+        </nav>
+      </div>
+    </header>
+    <div class="head-title">
+      <h2>내 물건 팔기</h2>
+    </div>
+    
+    <form id="upload-form">
+    <div class="product-container">
+        <!-- Slideshow container -->
+      <div class="slideshow-container">
+        
+        <!-- Full-width images with number and caption text -->
+
+          <div class="slide-img">
+            <div id="previewContainer"></div>
+          </div>
+            <p id="thumbnails"></p>
+            <input type="file" name="files[]" id="files" multiple>
+      
+          <script>
+            const filesInput = document.getElementById('files');
+            const thumbnailsContainer = document.getElementById('thumbnails');
+      
+            // listen for file selection
+            filesInput.addEventListener('change', function(event) {
+              // reset the thumbnails container
+              thumbnailsContainer.innerHTML = '';
+              var length = filesInput.files.length;
+              if(length>=5){
+                length=4;
+              }
+              // generate thumbnails for all selected files
+              for (let i = 0; i < length; i++) {
+                const file = filesInput.files[i];
+      
+                // generate a thumbnail for the file
+                const reader = new FileReader();
+                reader.onload = function(e) { 
+                  const img = document.createElement('img');
+                  img.src = e.target.result;
+                  img.width = 200;
+                  img.height = 200;
+                  thumbnailsContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+              }
+            });
+          </script>
+          
+
+      </div>        
+
+    </div>
+      <!-- Product information -->
+      <div class="product-info">
+        <p><input type="text" name="name" placeholder="글 제목" class="product-title"></p>
+        <p><input type="text" name="description" placeholder="상품 설명" class="product-description"></p>
+        <p><input type="text" name="price" placeholder="희망가격"class="product-price"></p>
+        <button onclick="upload_item();" class="chat-link">등록하기</button>
+      </div>
+    </div>
+    
+  </form>
+  <script src="/js/upload_form.js"></script>
+  </body>
+</html>

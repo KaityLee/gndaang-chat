@@ -12,4 +12,5 @@ public interface BoardMapper {
 
 	public int addItem(Items item);
 	public int addmattach(List<Files> list);
+	public Items getItem(int gid);
 }
