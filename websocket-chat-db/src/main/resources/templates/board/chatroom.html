@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/chatroom.css">
+</head>
+<body>
+ <th:block th:include="@{/board/header.html}"></th:block>
+    
+<div class="chatroom">
+  <h2 class="chatroom__title">대화목록</h2>
+  <ul class="chatroom__items">
+    <li class="chatroom__item" th:each="room:${chatroom}">
+      <a href="#" class="chatroom__link">
+        <div class="chatroom__icon">
+          <i class="fas fa-comments">🥕</i>
+        </div>
+        <div class="chatroom__details">
+          <h3 class="chatroom__name">[[${room.seller}]]</h3>
+          <p class="chatroom__description">[[${room.name}]]</p>
+        </div>
+        <div class="chatroom_enter">
+            <p>입장하기</p>
+        </div>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+</body>
+</html>

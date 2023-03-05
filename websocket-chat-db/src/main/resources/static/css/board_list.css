@@ -32,27 +32,7 @@
       object-fit: cover;
       border-radius: 15px;
     }
-    /* Define header style */
-    header {
-      background-color: #70c56d;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-    }
-    .inner_head{
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      margin: auto;
-    }
-   @media screen and (min-width: 768px){
-    .inner_head{
-      max-width: 100rem;
-      height:3rem;
-    }
-  }
+    
     
     /* Define navigation bar style */
     nav {

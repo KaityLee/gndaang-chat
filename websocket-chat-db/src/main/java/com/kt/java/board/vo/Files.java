@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(of= {"fnum"})
 public class Files {
-	private int gnum;
+	private int gid;
 	private int fnum;
 	private String fname;
 	private long fsize;

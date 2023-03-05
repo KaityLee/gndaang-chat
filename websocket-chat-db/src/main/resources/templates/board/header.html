@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style>
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+    *{
+      font-family: 'GmarketSansMedium';
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/* Define header style */
+    header {
+      background-color: #70c56d;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    .inner_head{
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin: auto;
+    }
+   @media screen and (min-width: 768px){
+    .inner_head{
+      max-width: 100rem;
+      height:3rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+      <div class="inner_head">
+        <span><h2>🥕 근당마켓</h2></span>
+        <nav>
+          <!-- Navigation links -->
+          <a href="#">로그인</a>
+          <a href="#">중고거래</a>
+          <a href="#">채팅목록</a>
+        </nav>
+      </div>
+    </header>
+</body>
+</html>

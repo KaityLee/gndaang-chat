@@ -3,23 +3,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kt.java.board.BoardMapper"> 
 
-	<insert id="addsaleform" parameterType="com.kt.java.board.vo.Items">
+	<insert id="saveItem" parameterType="com.kt.java.board.vo.Items">
 	 INSERT INTO items(gid,seller_id,name,price,description,view,created_at)
 	 VALUES(#{gid},#{seller_id},#{name},#{price},#{description},#{view},#{created_at})
 	</insert>
-	<update id="addmattach" parameterType="list">
-	INSERT INTO mattach (w_number,m_attach)
-			SELECT t.* FROM
-			(
-				<foreach collection="list" item="mattach" separator="union all" >
-					 SELECT (SELECT MAX(w_number) FROM market WHERE unum=#{mattach.unum}) AS w_number, #{mattach.m_attach} FROM DUAL
-				</foreach>
-			) t
+	
+	<update id="saveFile" parameterType="list">
+	 INSERT INTO files(fnum, gid, fname, fsize)
+       SELECT FILES_SEQ.NEXTVAL AS fnum, t1.* FROM
+       (
+           <foreach collection="list" item="item" index="index" separator="union all">
+                SELECT (SELECT MAX(gid) FROM items) AS gid,
+                	#{item.fname}, #{item.fsize} FROM DUAL
+           </foreach>
+       ) t1
 	</update>
 
-	<select id="getItem" parameterType="Integer"
-		resultType="com.kt.java.board.vo.Items">
-		SELECT * FROM items WHERE gid=#{gid}
-	</select>
-
+	<select id="getItem"
+            parameterType="integer"
+            resultType="map">
+         SELECT i.*, f.fnum, f.fname, f.fsize 
+         FROM items i LEFT OUTER JOIN files f
+         ON i.gid=f.gid WHERE i.gid=#{gid}
+  	 </select>
+  	 
+  	 <select id="chatRoomList" 
+  	  resultType="com.kt.java.board.vo.ChatRoom">
+  	 	SELECT * FROM chatroom WHERE gid=#{gid}
+  	 </select>
 </mapper>

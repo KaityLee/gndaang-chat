@@ -1,5 +1,6 @@
 package com.kt.java.board.vo;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +12,12 @@ import lombok.EqualsAndHashCode;
 public class Items 
 {
 	private int gid;
-	private String seller_id;
+	private String seller;
 	private String name;
 	private int price;
 	private String description;
 	private int view;
-	private java.sql.Date created_at;
-	private List<Files> attList = new ArrayList<>();
+	private Timestamp created_at;
+	private List<Files> fileList = new ArrayList<>();
 	
 }

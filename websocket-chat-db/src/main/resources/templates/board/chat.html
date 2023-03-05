@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="message-container"></div>
+        <input type="text" id="message-input">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var socket = new WebSocket("ws://localhost:80/ws");
+            var stompClient = Stomp.over(socket);
+            var roomId = "[[${roomId}}]]"
+
+            stompClient.connect({}, function(frame) {
+                console.log('Connected: ' + frame);
+
+                stompClient.subscribe('/topic/messages', function(response) {
+                    var messages = JSON.parse(response.body);
+                    displayMessages(messages);
+                });
+            });
+
+            function displayMessages(messages) {
+                var messageContainer = $('#message-container');
+                messageContainer.empty();
+
+                messages.forEach(function(message) {
+                    var messageDiv = $('<div class="message"></div>');
+                    messageDiv.text(message.sender + ': ' + message.content);
+                    messageContainer.append(messageDiv);
+                });
+            }
+
+            $('#send-button').click(function() {
+                var messageInput = $('#message-input');
+                var messageContent = messageInput.val();
+                var message = {
+                    content: messageContent,
+                    sender: "User",
+                    roomId: "my-room"
+                };
+
+                stompClient.send("/app/chat", {}, JSON.stringify(message));
+                messageInput.val("");
+            });
+        });
+    </script>
+</body>
+</html>
