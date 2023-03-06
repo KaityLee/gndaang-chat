@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel='stylesheet' href="/css/login.css">
+</head>
+<body>
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form action="/doLogin">
+      <h1>회원가입</h1>
+      <input type="text" placeholder="아이디" name="username"/>
+      <input type="text" placeholder="닉네임" name="nickname"/>
+      <input type="password" placeholder="비밀번호" name="password" />
+      <button class='submit'>가입하기</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="/login/success">
+      <h1>회원로그인</h1>
+      <input type="text" placeholder="아이디" name="username"/>
+      <input type="password" placeholder="비밀번호" name="password"/>
+      <button class='submit'>로그인</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>이미 등록한 회원이신가요?</h1>
+        <p>아래 버튼을 클릭하여 로그인 해주세요</p>
+        <button class="ghost" id="signIn">로그인</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>회원이 아니신가요?</h1>
+        <p>회원을 등록하시면 더 많은 기능을 이용할 수 있습니다</p>
+        <button class="ghost" id="signUp">회원가입하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+  container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+  container.classList.remove("right-panel-active");
+});
+</script>
+</body>
+</html>

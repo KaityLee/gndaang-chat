@@ -38,7 +38,7 @@ public class BoardService
 			   big = (java.math.BigDecimal)map.get("PRICE");
 			   item.setPrice(big.intValue());
 			   item.setDescription((String) map.get("DESCRIPTION"));
-			   big = (java.math.BigDecimal)map.get("VIEW");
+			   big = (java.math.BigDecimal)map.get("VIEW_COUNT");
 			   item.setView(big.intValue());
 			   item.setCreated_at((Timestamp)map.get("CREATED_AT"));
 			   

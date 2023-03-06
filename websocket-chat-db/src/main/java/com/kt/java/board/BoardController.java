@@ -41,25 +41,25 @@ public class BoardController
 		 return "board/upload_form";
 	 }
 	 
-	 @PostMapping("/uploadForm")
-	   @ResponseBody
-	   @Transactional
-	   public Map<String,Object> uploadform(@RequestParam("files")MultipartFile[] mfiles,
-	                     HttpServletRequest request, Items item) 
-	   {
-			ServletContext context = request.getServletContext();
-			String savePath = context.getRealPath("/WEB-INF/files");
-			Map<String, Object> map = new HashMap<>();
-			map.put("savePath", savePath);
-			map.put("mfiles", mfiles);
-			map.put("item", item);
+	@PostMapping("/uploadForm")
+	@ResponseBody
+	@Transactional
+	public Map<String,Object> uploadform(@RequestParam("files")MultipartFile[] mfiles,
+			HttpServletRequest request, Items item) 
+	{
+		ServletContext context = request.getServletContext();
+		String savePath = context.getRealPath("/WEB-INF/files");
+		Map<String, Object> map = new HashMap<>();
+		map.put("savePath", savePath);
+		map.put("mfiles", mfiles);
+		map.put("item", item);
 		 
-			boolean success = svc.upload(map);
+		boolean success = svc.upload(map);
 			 
-			map.put("success",success);
-		  
-		    return map;
-	   }
+		map.put("success",success);
+			  
+		return map;
+	}
 	 
 	 @GetMapping("/item")
 	 public String detail(@RequestParam int gid) 
