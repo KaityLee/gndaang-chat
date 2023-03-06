@@ -4,24 +4,79 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <link rel='stylesheet' href="/css/login.css">
+<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function userlogin()
+{
+	var Data = $('#userForm').serialize();
+	
+	$.ajax({
+			url : '/doLogin',	//주소확인할것
+			method : 'post',	//맵핑확인할것
+			data : Data,  											
+			cache : false,		
+			dataType:'json',                      
+			success : function(res)                
+			{		
+				if(res.confirm) //함수에 넣어준값 확인할것
+				{						
+					location.href="/user/main"; //성공시 주소(redirect?넣은 url? 확인바람)
+				}
+				else
+				{
+					alert(res.msg); //실패시 메세지만.
+				}
+			},
+			error : function(xhr,status,err)
+			{
+				alert(err);	
+			}
+			});		
+}
+
+function signUp()
+{
+	var Data = $('#regForm').serialize();
+	
+	$.ajax({
+			url : '/login/signup',	//주소확인할것
+			method : 'post',	//맵핑확인할것
+			data : Data,  											
+			cache : false,		
+			dataType:'json',                      
+			success : function(res)                
+			{		
+				if(res.confirm) //함수에 넣어준값 확인할것
+				{		
+					alert("회원등록 완료");
+					location.href="/login/"; 
+				}
+			},
+			error : function(xhr,status,err)
+			{
+				alert(err);	
+			}
+			});		
+}
+</script>
 </head>
 <body>
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form action="/doLogin">
+    <form id="regForm">
       <h1>회원가입</h1>
       <input type="text" placeholder="아이디" name="username"/>
       <input type="text" placeholder="닉네임" name="nickname"/>
       <input type="password" placeholder="비밀번호" name="password" />
-      <button class='submit'>가입하기</button>
+      <button onclick='signUp();'>가입하기</button>
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form action="/login/success">
+    <form id="userForm">
       <h1>회원로그인</h1>
       <input type="text" placeholder="아이디" name="username"/>
       <input type="password" placeholder="비밀번호" name="password"/>
-      <button class='submit'>로그인</button>
+      <button onclick='userlogin();'>로그인</button>
     </form>
   </div>
   <div class="overlay-container">
