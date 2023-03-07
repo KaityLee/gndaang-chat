@@ -37,19 +37,35 @@
       height:3rem;
     }
   }
+  a{
+  color:#FFFFFF;
+  text-decoration: none;}
 </style>
+
 </head>
 <body>
 <header>
       <div class="inner_head">
-        <span><h2>🥕 근당마켓</h2></span>
+        <h2><a href="/board/"><span>🥕 근당마켓</span></a></h2>
         <nav>
           <!-- Navigation links -->
-          <a href="#">로그인</a>
+          <span id="loginDiv"><a href="/login/form">로그인</a></span>
           <a href="/board/">중고거래</a>
           <a href="/board/chatroom">채팅목록</a>
         </nav>
       </div>
     </header>
+    <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+
+<script>
+var uid = '[[${session.username}]]'
+
+if(uid!=''){
+
+	$("#loginDiv").empty();
+	$("#loginDiv").append("<a href='/logout'>로그아웃</a>")
+	
+}
+</script>
 </body>
 </html>

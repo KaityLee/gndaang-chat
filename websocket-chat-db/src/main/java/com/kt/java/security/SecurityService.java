@@ -20,11 +20,12 @@ public class SecurityService {
 	
  	@Transactional	// DB에 vendor 추가
 	public int addUsers(Users user) 
-	{
-		dao.addUser(user);		
+	{	
 		
 		BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
 		user.setPassword(enc.encode(user.getPassword()));
+		
+		dao.addUser(user);	
 		
 		int rows = dao.addAuthorities(user);
 		return rows;

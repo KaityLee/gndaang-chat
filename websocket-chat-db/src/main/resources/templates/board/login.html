@@ -17,15 +17,8 @@ function userlogin()
 			cache : false,		
 			dataType:'json',                      
 			success : function(res)                
-			{		
-				if(res.confirm) //함수에 넣어준값 확인할것
-				{						
-					location.href="/user/main"; //성공시 주소(redirect?넣은 url? 확인바람)
-				}
-				else
-				{
-					alert(res.msg); //실패시 메세지만.
-				}
+			{			
+				history.go(-1); 
 			},
 			error : function(xhr,status,err)
 			{
@@ -34,78 +27,27 @@ function userlogin()
 			});		
 }
 
-function signUp()
-{
-	var Data = $('#regForm').serialize();
-	
-	$.ajax({
-			url : '/login/signup',	//주소확인할것
-			method : 'post',	//맵핑확인할것
-			data : Data,  											
-			cache : false,		
-			dataType:'json',                      
-			success : function(res)                
-			{		
-				if(res.confirm) //함수에 넣어준값 확인할것
-				{		
-					alert("회원등록 완료");
-					location.href="/login/"; 
-				}
-			},
-			error : function(xhr,status,err)
-			{
-				alert(err);	
-			}
-			});		
-}
 </script>
 </head>
 <body>
 <div class="container" id="container">
-  <div class="form-container sign-up-container">
-    <form id="regForm">
-      <h1>회원가입</h1>
-      <input type="text" placeholder="아이디" name="username"/>
-      <input type="text" placeholder="닉네임" name="nickname"/>
-      <input type="password" placeholder="비밀번호" name="password" />
-      <button onclick='signUp();'>가입하기</button>
-    </form>
-  </div>
   <div class="form-container sign-in-container">
-    <form id="userForm">
+    <form id="userForm" action="/doLogin" method="post">
       <h1>회원로그인</h1>
-      <input type="text" placeholder="아이디" name="username"/>
-      <input type="password" placeholder="비밀번호" name="password"/>
-      <button onclick='userlogin();'>로그인</button>
+      <input type="text" placeholder="아이디" name="username">
+      <input type="password" placeholder="비밀번호" name="password">
+      <button type="submit">로그인</button>
     </form>
   </div>
   <div class="overlay-container">
     <div class="overlay">
-      <div class="overlay-panel overlay-left">
-        <h1>이미 등록한 회원이신가요?</h1>
-        <p>아래 버튼을 클릭하여 로그인 해주세요</p>
-        <button class="ghost" id="signIn">로그인</button>
-      </div>
       <div class="overlay-panel overlay-right">
         <h1>회원이 아니신가요?</h1>
         <p>회원을 등록하시면 더 많은 기능을 이용할 수 있습니다</p>
-        <button class="ghost" id="signUp">회원가입하기</button>
+        <a href="/login/signup"><button class="ghost" id="signUp">회원가입하기</button></a>
       </div>
     </div>
   </div>
 </div>
-<script type="text/javascript">
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
-
-signUpButton.addEventListener('click', () => {
-  container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-  container.classList.remove("right-panel-active");
-});
-</script>
 </body>
 </html>

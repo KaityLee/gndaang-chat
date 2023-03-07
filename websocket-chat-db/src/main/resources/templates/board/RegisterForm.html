@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel='stylesheet' href="/css/login.css">
+<script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+function signUp()
+{
+	var Data = $('#regForm').serialize();
+	
+	$.ajax({
+			url : '/login/signup',	//주소확인할것
+			method : 'post',	//맵핑확인할것
+			data : Data,  											
+			cache : false,		
+			dataType:'json',                      
+			success : function(res)                
+			{	
+				alert("회원등록 완료");
+				location.href="/login/form"; 
+			},
+			error : function(xhr,status,err)
+			{
+				alert(err);	
+			}
+			});		
+}
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container" id="container">
+  <div class="form-container sign-in-container">
+  <div class="overlay">
+      <div class="overlay-panel overlay-right">
+        <h1>이미 등록한 회원이신가요?</h1>
+        <p>아래 버튼을 클릭하여 로그인 해주세요</p>
+        <a href="/login/form"><button class="ghost" id="signIn">로그인</button></a>
+      </div>
+     </div>
+    
+  </div>
+  <div class="overlay-container">
+    <form id="regForm">
+      <h1>회원가입</h1>
+      <input type="text" placeholder="아이디" name="username"/>
+      <input type="text" placeholder="닉네임" name="nickname"/>
+      <input type="password" placeholder="비밀번호" name="password" />
+      <button onclick='signUp();'>가입하기</button>
+    </form>
+   </div>
+</div>
+</body>
+</html>
