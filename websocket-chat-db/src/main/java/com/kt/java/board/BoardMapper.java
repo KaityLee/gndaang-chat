@@ -14,6 +14,7 @@ public interface BoardMapper {
 
 	public int saveItem(Items item);
 	public int saveFile(List<Files> list);
+	public List<Map<String,Object>> boardList();
 	public List<Map<String,Object>> getItem(int gid);
 	public List<ChatRoom> chatRoomList(String buyer);
 }

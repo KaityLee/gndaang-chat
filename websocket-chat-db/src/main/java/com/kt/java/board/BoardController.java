@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +33,9 @@ public class BoardController
 	 public BoardService svc;
 	 
 	 @GetMapping("/list")
-	 public String itemList() 
+	 public String itemList(Model m) 
 	 {
+		 m.addAttribute("itemList",svc.boardList());
 		 return "board/board_list";
 	 }
 	 
@@ -62,10 +64,16 @@ public class BoardController
 	}
 	 
 	 @GetMapping("/item")
-	 public String detail(@RequestParam int gid) 
+	 public String detail(@RequestParam int gid, Model m) 
 	 {
-		 Items item = svc.getItem(gid);
-		 return "board/upload_form";
+		 m.addAttribute("item",svc.getItem(gid));
+		 return "board/product";
+	 }
+	 
+	 @GetMapping("/searchRoom")
+	 public String searchRoom()
+	 {
+		 return "board/chat";
 	 }
 	 
 	 @PostMapping("/chatroom")

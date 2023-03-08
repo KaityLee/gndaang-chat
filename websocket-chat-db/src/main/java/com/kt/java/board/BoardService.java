@@ -89,16 +89,49 @@ public class BoardService
 			   }catch (Exception e) {
 			         e.printStackTrace();
 			   }
-	      log.info("뭐가문제여");
 	      int saved = dao.saveItem((Items)map.get("item"));
 	   if(fileList.size()!=0) 
 	     {
-		   	log.info("뭐가 문제냐구");
 	    	 int attached = dao.saveFile(fileList);
 	     }
 	   log.info(Integer.toString(saved));
 	      return saved>0? "저장 성공":"저장실패" ;
    }
+   
+   public List<Items> boardList()
+   {
+	   List<Map<String,Object>> mlist = dao.boardList();
+	   List<Items> list = new ArrayList<>();
+	   
+	   for(int i=0;i<mlist.size();i++)
+	   {
+		   Map<String,Object> map = mlist.get(i);
+		   
+		   BigDecimal big = (java.math.BigDecimal)map.get("GID");
+		   Items item = new Items();
+		   item.setGid(big.intValue());
+		   
+		   item.setName((String) map.get("NAME"));
+		   item.setSeller((String) map.get("SELLER"));
+		   big = (BigDecimal)map.get("PRICE");
+		   item.setPrice(big.intValue());
+		   		   
+		   Files file = new Files();
+		   file.setFname((String) map.get("FNAME"));
+		   
+		   item.getFileList().add(file);
+		   
+		   if(list.contains(item))	// item 중복 검사
+		   {
+			   continue;
+		   }
+		   
+		   list.add(item);			   
+	   }
+	   log.info(list.toString());
+	  return list;
+   }
+   
    
 	public List<ChatRoom> chatRoomList(String buyer){
 		return dao.chatRoomList(buyer);

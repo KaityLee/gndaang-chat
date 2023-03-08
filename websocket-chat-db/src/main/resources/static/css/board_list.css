@@ -16,6 +16,11 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
+      margin : 0 auto;
+    }
+    .items{
+    padding:1em;
+    text-align: center;
     }
     
     /* Define a flex item */

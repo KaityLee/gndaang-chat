@@ -6,9 +6,10 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@EqualsAndHashCode(of="gid")
+@EqualsAndHashCode(of={"gid"})
 public class Items 
 {
 	private int gid;
@@ -19,5 +20,6 @@ public class Items
 	private int view;
 	private Timestamp created_at;
 	private List<Files> fileList = new ArrayList<>();
+	
 	
 }

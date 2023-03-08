@@ -32,7 +32,9 @@
   height:3rem;
 }
 }
-
+div {
+	padding:1rem;
+}
 /* Define navigation bar style */
 nav {
   padding: 10px;

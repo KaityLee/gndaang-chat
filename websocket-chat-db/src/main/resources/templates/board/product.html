@@ -6,28 +6,18 @@
     
   </head>
   <body>
-    <header>
-      <div class="inner_head">
-        <span><h2>🥕 근당마켓</h2></span>
-        <nav>
-          <!-- Navigation links -->
-          <a href="#">로그인</a>
-          <a href="#">중고거래</a>
-          <a href="#">채팅목록</a>
-        </nav>
-      </div>
-    </header>
+    <th:block th:include="@{/board/header.html}"></th:block>
     <div class="product-container">
         <!-- Slideshow container -->
       <div class="slideshow-container">
         
         <!-- Full-width images with number and caption text -->
 
-        <div class="mySlides fade" th:each="att, iStat:${camp.attList}">
+        <div class="mySlides fade" th:each="file, iStat:${item.fileList}">
           <div class="numbertext">[[${iStat.index+1}]] / [[${iStat.size}]]
           </div>
           <div class="slide-img">
-            <img style="aspect-ratio: 16 / 9" th:src="https://via.placeholder.com/150x150">
+            <img style="aspect-ratio: 16 / 9" th:src="'/files/'+${file.fname}">
           </div>
         </div>
         <!-- Next and previous buttons -->
@@ -38,17 +28,17 @@
 
             <!-- The dots/circles -->        
         <div style="text-align:center">
-          <span th:each="att, iStat:${camp.attList}">
+          <span th:each="file, iStat:${item.fileList}">
             <span class="dot" th:onclick="'currentSlide('+${iStat.index+1}+')'"></span>
           </span>
         </div>
     </div>
       <!-- Product information -->
       <div class="product-info">
-        <h1 class="product-title">[[${items.name}]]</h1>
-        <p class="product-description">[[${items.desc}]]</p>
-        <p class="product-price">[[${items.price}]]</p>
-        <a href="#" class="chat-link">1:1 대화하기</a>
+        <h1 class="product-title">[[${item.name}]]</h1>
+        <p class="product-description">[[${item.description}]]</p>
+        <p class="product-price">[[${item.price}]]</p>
+        <a href="/board/searchRoom" class="chat-link">1:1 대화하기</a>
       </div>
     
     <script src="/js/product.js"></script>

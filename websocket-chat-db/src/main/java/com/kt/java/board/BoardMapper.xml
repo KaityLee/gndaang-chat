@@ -19,6 +19,13 @@
        ) t1
 	</update>
 
+  <select id="boardList"
+         resultType="map">
+       SELECT i.*,f.fname FROM items i 
+		INNER JOIN files f on f.gid=i.gid order by fnum desc
+   </select>
+   
+
 	<select id="getItem"
             parameterType="integer"
             resultType="map">
