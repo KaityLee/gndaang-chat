@@ -22,7 +22,7 @@
             <div id="previewContainer"></div>
           </div>
             <p id="thumbnails"></p>
-            <input type="file" name="files[]" id="files" multiple>
+            <input type="file" name="files" id="files" multiple>
       
           <script>
             const filesInput = document.getElementById('files');
@@ -60,6 +60,7 @@
     </div>
       <!-- Product information -->
       <div class="product-info">
+      	<input type='hidden' name='seller' th:value='${session.username}'>
         <p><input type="text" name="name" placeholder="글 제목" class="product-title"></p>
         <p><input type="text" name="description" placeholder="상품 설명" class="product-description"></p>
         <p><input type="text" name="price" placeholder="희망가격"class="product-price"></p>

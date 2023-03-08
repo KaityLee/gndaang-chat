@@ -14,7 +14,7 @@ function upload_item(){
 				success : function(res)                
 				{									
 					alert(res.msg);
-					location.reload();
+					location.href='/board/list';
 									
 				},
 				error : function(xhr,status,err)

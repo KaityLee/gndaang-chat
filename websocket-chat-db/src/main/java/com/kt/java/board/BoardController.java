@@ -20,16 +20,18 @@ import com.kt.java.board.vo.Items;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Controller
 @RequestMapping("/board")
+@Slf4j
 public class BoardController 
 {
 	 @Autowired
 	 public BoardService svc;
 	 
-	 @GetMapping("/")
+	 @GetMapping("/list")
 	 public String itemList() 
 	 {
 		 return "board/board_list";
@@ -41,22 +43,20 @@ public class BoardController
 		 return "board/upload_form";
 	 }
 	 
-	@PostMapping("/uploadForm")
+	@PostMapping("/upload")
 	@ResponseBody
-	@Transactional
 	public Map<String,Object> uploadform(@RequestParam("files")MultipartFile[] mfiles,
 			HttpServletRequest request, Items item) 
 	{
 		ServletContext context = request.getServletContext();
-		String savePath = context.getRealPath("/WEB-INF/files");
 		Map<String, Object> map = new HashMap<>();
-		map.put("savePath", savePath);
 		map.put("mfiles", mfiles);
 		map.put("item", item);
-		 
-		boolean success = svc.upload(map);
+		
+		log.info(item.toString()+mfiles.toString());
+		String msg = svc.upload(map);
 			 
-		map.put("success",success);
+		map.put("msg",msg);
 			  
 		return map;
 	}

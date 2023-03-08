@@ -4,8 +4,8 @@
 <mapper namespace="com.kt.java.board.BoardMapper"> 
 
 	<insert id="saveItem" parameterType="com.kt.java.board.vo.Items">
-	 INSERT INTO items(gid,seller,name,price,description,view_count,created_at)
-	 VALUES(ITEMS_SEQ.NEXTVAL,#{seller},#{name},#{price},#{description},#{view},#{created_at})
+	 INSERT INTO items(gid,seller,name,price,description)
+	 VALUES(ITEMS_SEQ.NEXTVAL,#{seller},#{name},#{price},#{description})
 	</insert>
 	
 	<update id="saveFile" parameterType="list">

@@ -2,6 +2,9 @@ package com.kt.java.board;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,10 @@ import com.kt.java.board.vo.ChatRoom;
 import com.kt.java.board.vo.Files;
 import com.kt.java.board.vo.Items;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class BoardService 
 {
 	@Autowired
@@ -59,9 +65,9 @@ public class BoardService
 		   return item;
 	}
 	   
-   public boolean upload(Map<String,Object> map)
+   public String upload(Map<String,Object> map)
    {
-	   String savePath = "./src/main/resources/static/files/";
+	   Path fileStroageLocation=Paths.get("./src/main/resources/static/files");
 	   MultipartFile[] mfiles = (MultipartFile[]) map.get("mfiles");
 	   
 	   List<Files> fileList = new ArrayList<>();
@@ -70,24 +76,28 @@ public class BoardService
 		         {
 		  		   if(mfiles[0].getSize()==0) continue; // 첨부파일 없을때 탈출
 		  		   
-		            mfiles[i].transferTo(
-		              new File(savePath+"/"+mfiles[i].getOriginalFilename()));
-		            String fname = mfiles[i].getOriginalFilename();
-		            long fsize = mfiles[i].getSize();
-		            Files file = new Files();
-		            file.setFname(fname);
-		            file.setFsize(fsize);
-		            fileList.add(file);            
+		  		   Files file = new Files();
+		  		   String fname = mfiles[i].getOriginalFilename();
+		           file.setFname(fname);
+		           
+		           fileList.add(file); 
+		           
+		           Path targetLocation = fileStroageLocation.resolve(fname);
+		           java.nio.file.Files.copy(mfiles[i].getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+				
 		         }
 			   }catch (Exception e) {
 			         e.printStackTrace();
 			   }
+	      log.info("뭐가문제여");
 	      int saved = dao.saveItem((Items)map.get("item"));
 	   if(fileList.size()!=0) 
 	     {
+		   	log.info("뭐가 문제냐구");
 	    	 int attached = dao.saveFile(fileList);
 	     }
-	      return saved>0 ;
+	   log.info(Integer.toString(saved));
+	      return saved>0? "저장 성공":"저장실패" ;
    }
    
 	public List<ChatRoom> chatRoomList(String buyer){

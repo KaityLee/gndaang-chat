@@ -51,7 +51,7 @@ public class SecurityController {
 				map.put("confirm",true);
 			}
 		}
-		return "redirect:/board/";
+		return "redirect:/board/list";
 	}
 	
 	
