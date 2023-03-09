@@ -131,9 +131,18 @@ public class BoardService
 	   log.info(list.toString());
 	  return list;
    }
+ 
+   public int searchRoom(int gid, String buyer)
+   {
+	   return  dao.searchRoom(gid,buyer);
+   }
    
+   public int createRoom(int gid,String buyer)
+   {
+	   return dao.createRoom(gid,buyer);
+   }
    
-	public List<ChatRoom> chatRoomList(String buyer){
+   	public List<ChatRoom> chatRoomList(String buyer){
 		return dao.chatRoomList(buyer);
 	}
 

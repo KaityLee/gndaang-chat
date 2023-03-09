@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ChatRoom 
 {
-	private int rid;
+	private int roomId;
 	private int gid;
 	private String buyer;
 	private Timestamp created_at;

@@ -21,6 +21,7 @@ import com.kt.java.board.vo.Items;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -31,6 +32,9 @@ public class BoardController
 {
 	 @Autowired
 	 public BoardService svc;
+	 
+	 @Autowired
+	 public HttpSession session;
 	 
 	 @GetMapping("/list")
 	 public String itemList(Model m) 
@@ -71,8 +75,15 @@ public class BoardController
 	 }
 	 
 	 @GetMapping("/searchRoom")
-	 public String searchRoom()
+	 public String searchRoom(@RequestParam int gid,Model m)
 	 {
+		 String buyer = (String) session.getAttribute("username");
+		 int roomId = svc.searchRoom(gid,buyer);
+		 if(roomId==0) {
+			 roomId= svc.createRoom(gid,buyer);
+		 }
+		 m.addAttribute("roomId",roomId);
+		 
 		 return "board/chat";
 	 }
 	 
