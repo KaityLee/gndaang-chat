@@ -87,10 +87,22 @@ public class BoardController
 		 return "board/chat";
 	 }
 	 
-	 @PostMapping("/chatroom")
-	 public List<ChatRoom> chatRooms(String buyer)
+	 @PostMapping("enter_room")
+	 public String enterRoom(int roomId, Model m)
 	 {
-		 return svc.chatRoomList(buyer);
+		 log.info(Integer.toString(roomId));
+		 m.addAttribute("roomId",roomId);
+		 return "board/chat";
+	 }
+	 
+	 @GetMapping("/chatroom")
+	 public String chatRooms(Model m)
+	 {
+		 String user = (String) session.getAttribute("username");
+		 
+		 m.addAttribute("chatroom",svc.chatRoomList(user));
+		 
+		 return "board/chatroom";
 	 }
 	   
 }

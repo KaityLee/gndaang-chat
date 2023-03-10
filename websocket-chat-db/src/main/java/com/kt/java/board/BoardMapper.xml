@@ -26,23 +26,26 @@
    </select>
    
     <select id="searchRoom"
-         resultType="integer">     
+         resultType="map" >     
 	SELECT roomid FROM chatroom WHERE gid = #{gid} AND buyer = #{buyer}
 </select>
    
    <insert id="createRoom" >
-	  INSERT INTO chatroom (rid, gid, buyer) VALUES (ROOM_SEQ.NEXTVAL,#{gid}, #{buyer})
+	  INSERT INTO chatroom (roomid, gid, buyer) VALUES (ROOM_SEQ.NEXTVAL,#{gid}, #{buyer})
 	  <selectKey keyProperty="roomid" order="AFTER" resultType="int">
 	    SELECT roomid FROM chatroom WHERE gid = #{gid} AND buyer = #{buyer}
 	  </selectKey>
 	</insert>
    
-   <select id="chatRoomList" resultType="com.kt.java.board.vo.ChatRoom">
-	  SELECT cr.* FROM chatroom cr
-	  JOIN items i ON i.gid = cr.gid
-	  WHERE i.seller = #{seller}
-	  UNION
-	  SELECT * FROM chatroom WHERE buyer=#{buyer}
+   <select id="chatRoomList" resultType="map">
+	  SELECT cr.*, i.name
+		FROM chatroom cr
+		JOIN items i ON i.gid = cr.gid
+		WHERE i.seller = #{seller}
+		UNION
+		SELECT cr.*, NULL as name
+		FROM chatroom cr
+		WHERE cr.buyer = #{buyer}
 	</select>   
 
 	<select id="getItem"

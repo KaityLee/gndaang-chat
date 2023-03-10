@@ -20,9 +20,9 @@ public interface BoardMapper {
 	
 	public List<Map<String,Object>> getItem(int gid);
 	
-	public int searchRoom(int gid, String buyer);
+	public Map<String,Object> searchRoom(int gid, String buyer);
 	
 	public int createRoom(int gid, String buyer);
 	
-	public List<ChatRoom> chatRoomList(String buyer);
+	public List<Map<String,Object>> chatRoomList(String seller,String buyer);
 }

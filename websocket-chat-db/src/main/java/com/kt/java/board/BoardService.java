@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +135,15 @@ public class BoardService
  
    public int searchRoom(int gid, String buyer)
    {
-	   return  dao.searchRoom(gid,buyer);
+	   Map<String,Object> map = dao.searchRoom(gid,buyer);
+
+	   int roomId = 0;
+	   if(map!=null) {
+	   Object obj =  map.get("ROOMID");
+	   BigDecimal big = (BigDecimal)obj;
+	   roomId = big.intValue();
+	   }
+	   return roomId;
    }
    
    public int createRoom(int gid,String buyer)
@@ -142,8 +151,21 @@ public class BoardService
 	   return dao.createRoom(gid,buyer);
    }
    
-   	public List<ChatRoom> chatRoomList(String buyer){
-		return dao.chatRoomList(buyer);
+   	public List<Map<String,Object>> chatRoomList(String user){
+   		
+   		List<Map<String,Object>> list = dao.chatRoomList(user,user);
+   		List<Map<String,Object>> room_list = new ArrayList<>();
+   		
+   		for(int i=0;i<list.size();i++) {
+   			Map<String,Object> map = list.get(i);
+   			BigDecimal big = (BigDecimal)map.get("ROOMID");
+   			map.put("roomId",big.intValue());   			
+   			map.put("buyer",(String)map.get("BUYER"));
+   			map.put("item_name", (String)map.get("NAME"));   			
+   			room_list.add(map);
+   		}
+   		
+		return room_list;
 	}
 
 }

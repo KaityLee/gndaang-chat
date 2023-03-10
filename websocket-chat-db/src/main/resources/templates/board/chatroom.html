@@ -4,6 +4,26 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/chatroom.css">
+<script>
+function connect_chat(roomId){
+		
+    let f = document.createElement('form');
+    
+    let obj;
+    obj = document.createElement('input');
+    obj.setAttribute('type', 'hidden');
+    obj.setAttribute('name', 'roomId');
+    obj.setAttribute('value', roomId);
+    
+    f.appendChild(obj);
+    f.setAttribute('method', 'post');
+    f.setAttribute('action', '/board/enter_room');
+    document.body.appendChild(f);
+    f.submit();
+		
+}
+</script>
+
 </head>
 <body>
  <th:block th:include="@{/board/header.html}"></th:block>
@@ -12,13 +32,13 @@
   <h2 class="chatroom__title">대화목록</h2>
   <ul class="chatroom__items">
     <li class="chatroom__item" th:each="room:${chatroom}">
-      <a href="#" class="chatroom__link">
+      <a th:href="'javascript:connect_chat('+${room.roomId}+');'"  class="chatroom__link">
         <div class="chatroom__icon">
           <i class="fas fa-comments">🥕</i>
         </div>
         <div class="chatroom__details">
-          <h3 class="chatroom__name">[[${room.seller}]]</h3>
-          <p class="chatroom__description">[[${room.name}]]</p>
+          <h3 class="chatroom__name">[[${room.buyer}]]</h3>
+          <p class="chatroom__description">[[${room.item_name}]]</p>
         </div>
         <div class="chatroom_enter">
             <p>입장하기</p>

@@ -38,7 +38,7 @@
         <h1 class="product-title">[[${item.name}]]</h1>
         <p class="product-description">[[${item.description}]]</p>
         <p class="product-price">[[${item.price}]]</p>
-        <a th:href="'/board/searchRoom?gid='+${file.gid}" class="chat-link">1:1 대화하기</a>
+        <a th:href="'/board/searchRoom?gid='+${item.gid}" class="chat-link">1:1 대화하기</a>
       </div>
     
     <script src="/js/product.js"></script>

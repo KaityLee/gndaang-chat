@@ -3,6 +3,7 @@
 <head>
     <title>Chat App</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/sockjs/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <body>
@@ -14,9 +15,9 @@
 
     <script>
         $(document).ready(function() {
-            var socket = new WebSocket("ws://localhost:80/ws");
+            var socket = new SockJS("http://localhost:80/ws");
             var stompClient = Stomp.over(socket);
-            var roomId = "[[${roomId}}]]"
+            var roomId = "[[${roomId}]]"
 
             stompClient.connect({}, function(frame) {
                 console.log('Connected: ' + frame);
