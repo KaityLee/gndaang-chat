@@ -63,9 +63,11 @@ public class SecurityController {
 	
 	@PostMapping("/signup")
 	@ResponseBody
-	public boolean signup(Users user)
+	public Map<String,Object> signup(Users user)
 	{
-		return svc.addUsers(user)>1;
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", svc.addUsers(user));
+		return map;
 	}
 	
 }

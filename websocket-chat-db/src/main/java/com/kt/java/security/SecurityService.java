@@ -19,7 +19,7 @@ public class SecurityService {
 	
 	
  	@Transactional	// DB에 vendor 추가
-	public int addUsers(Users user) 
+	public boolean addUsers(Users user) 
 	{	
 		
 		BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
@@ -28,7 +28,7 @@ public class SecurityService {
 		dao.addUser(user);	
 		
 		int rows = dao.addAuthorities(user);
-		return rows;
+		return rows>1;
 	}
 	
 	// id 중복 체크

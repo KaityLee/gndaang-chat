@@ -13,34 +13,33 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ChatController {
 
-    private final SimpMessagingTemplate messagingTemplate;
-    private final ChatRepository chatRepository;
+	@Autowired
+    private SimpMessagingTemplate messagingTemplate;
+	@Autowired
+    private ChatService chatService;
 
-    public ChatController(SimpMessagingTemplate messagingTemplate, ChatRepository chatRepository) {
+    public ChatController(SimpMessagingTemplate messagingTemplate, ChatService chatService) {
         this.messagingTemplate = messagingTemplate;
-        this.chatRepository = chatRepository;
+        this.chatService = chatService;
     }
 
     @MessageMapping("/chat/{roomId}")
     public void sendMessage(@DestinationVariable String roomId, @Payload Chat chat) {
         chat.setRoomId(roomId);
         chat.setTimestamp(new Date());
-        chatRepository.save(chat);
+        chatService.saveMessage(chat);
 
-        String recipient = chat.getRecipient();
-        String sender = chat.getSender();
-
-        messagingTemplate.convertAndSendToUser(recipient, "/queue/messages", chat);
-        messagingTemplate.convertAndSendToUser(sender, "/queue/messages", chat);
+        messagingTemplate.convertAndSend( "/topic/messages/" + chat.getRoomId(), chat);
     }
 
-    @GetMapping("/messages/{roomId}")
-    public List<Chat> getMessagesByRoomId(@PathVariable String roomId) {
-        return chatRepository.findByRoomId(roomId);
+    @GetMapping("/messages")
+    public List<Chat> getMessagesByRoomId(@RequestParam String roomId) {
+        return chatService.findByRoomId(roomId);
     }
 
     
