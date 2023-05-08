@@ -83,6 +83,7 @@ public class BoardController
 			 roomId= svc.createRoom(gid,buyer);
 		 }
 		 m.addAttribute("roomId",roomId);
+		 m.addAttribute("name",svc.findname(roomId));
 		 
 		 return "board/chat";
 	 }
@@ -90,7 +91,7 @@ public class BoardController
 	 @PostMapping("/enter_room")
 	 public String enterRoom(int roomId, Model m)
 	 {
-		 log.info(Integer.toString(roomId));
+		 m.addAttribute("name",svc.findname(roomId));
 		 m.addAttribute("roomId",roomId);
 		 return "board/chat";
 	 }

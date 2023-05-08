@@ -167,5 +167,10 @@ public class BoardService
    		
 		return room_list;
 	}
+   	
+   	public String findname(int roomId)
+   	{
+   		return dao.findname(roomId);
+   	}
 
 }

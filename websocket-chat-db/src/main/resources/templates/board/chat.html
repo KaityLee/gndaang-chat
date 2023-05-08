@@ -8,10 +8,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <body>
+
     <div id="chat-container">
+     <h1>[[${name}]]</h1>
         <div id="message-container"></div>
+        <div id="yourMsg">
         <input type="text" id="message-input">
         <button id="send-button">Send</button>
+        </div>
     </div>
 
     <script>
@@ -32,24 +36,19 @@
             
             function displayMessages(messages) {
                 var messageContainer = $('#message-container');
-
-                  var messageDiv = $('<div class="message"></div>');
-                  messageDiv.text(messages.sender + ': ' + messages.content);
+				
+                var sender = messages.sender;
+                if(sender=="[[${session.username}]]")
+               	{
+                	var messageDiv = $('<div class="from_me"></div>');
+               	}else{var messageDiv = $('<div class="from_others"></div>');}
+                  
+                  var b = $('<b></b>');
+                  b.text(messages.sender + ': ' + messages.content)
+                  messageDiv.append(b);
                   messageContainer.append(messageDiv);
-                  console.log('왜 안오노');
               }
             
-            /*
-            function displayMessages(messages) {
-                var messageContainer = $('#message-container');
-                messageContainer.empty();
-
-                messages.forEach(function(message) {
-                    var messageDiv = $('<div class="message"></div>');
-                    messageDiv.text(message.sender + ': ' + message.content);
-                    messageContainer.append(messageDiv);
-                });
-            }*/
 
             $('#send-button').click(function() {
                 var messageInput = $('#message-input');

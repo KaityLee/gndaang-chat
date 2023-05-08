@@ -25,4 +25,7 @@ public interface BoardMapper {
 	public int createRoom(int gid, String buyer);
 	
 	public List<Map<String,Object>> chatRoomList(String seller,String buyer);
+
+	public String findname(int roomId);
+
 }
