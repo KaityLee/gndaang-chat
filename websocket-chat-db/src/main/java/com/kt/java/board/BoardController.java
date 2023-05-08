@@ -87,7 +87,7 @@ public class BoardController
 		 return "board/chat";
 	 }
 	 
-	 @PostMapping("enter_room")
+	 @PostMapping("/enter_room")
 	 public String enterRoom(int roomId, Model m)
 	 {
 		 log.info(Integer.toString(roomId));
