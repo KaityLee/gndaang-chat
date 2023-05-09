@@ -109,6 +109,12 @@
                 messageInput.val("");
             });
             
+            $('#message-input').keypress(function(e) {
+                if(e.which == 13) { // 13 is the "Enter" key code
+                    $('#send-button').click(); // Trigger the click event for the send button
+                }
+            });
+            
             $(window).scroll(function() {
                 if ($(window).scrollTop() == 0) {
                   loadMessages(currentPage + 1);
