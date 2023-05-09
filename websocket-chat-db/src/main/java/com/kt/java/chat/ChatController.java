@@ -1,5 +1,6 @@
 package com.kt.java.chat;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class ChatController {
 
 	@Autowired
@@ -37,9 +42,12 @@ public class ChatController {
         messagingTemplate.convertAndSend( "/topic/messages/" + chat.getRoomId(), chat);
     }
 
-    @GetMapping("/messages")
-    public List<Chat> getMessagesByRoomId(@RequestParam String roomId) {
-        return chatService.findByRoomId(roomId);
+    @GetMapping("/chat/messages")
+    @ResponseBody
+    public List<Chat> getMessagesByRoomId(@RequestParam String roomId, @RequestParam int page, @RequestParam int size) {
+       
+    	List<Chat> list = chatService.findByRoomId(roomId, page, size);
+    	return list;
     }
 
     

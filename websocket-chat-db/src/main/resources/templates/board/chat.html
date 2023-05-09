@@ -24,17 +24,36 @@
         	var socket = new SockJS(socketUrl);
             var stompClient = Stomp.over(socket);
             var roomId = "[[${roomId}]]"
+         	var currentPage = 0;
+            var pageSize = 10;
 
             stompClient.connect({}, function(frame) {
                 console.log('Connected: ' + frame);
 
             stompClient.subscribe('/topic/messages/' + roomId, function(response) {
                 var messages = JSON.parse(response.body);
-                displayMessages(messages);
+                displayMessage(messages);
               });
+            	loadMessages(currentPage);
             });
             
-            function displayMessages(messages) {
+            function loadMessages(page) {
+                $.ajax({
+                  url: "/chat/messages",
+                  data: {roomId: roomId, page: page, size: pageSize},
+                  success: function(messages) {
+                	  if (messages.length > 0) {
+                      currentPage = page;
+                      displayMessages(messages);
+                    }
+                  },error: function(jqXHR, textStatus, errorThrown) {
+                	  console.log('loadMessages error:', textStatus, errorThrown);
+                  }
+                  });
+              }
+            
+           
+            function displayMessage(messages) {
                 var messageContainer = $('#message-container');
 				
                 var sender = messages.sender;
@@ -47,7 +66,33 @@
                   b.text(messages.sender + ': ' + messages.content)
                   messageDiv.append(b);
                   messageContainer.append(messageDiv);
+                  
+                  // Scroll to the bottom of the message container
+                  messageContainer.scrollTop(messageContainer[0].scrollHeight);
+
               }
+           
+            function displayMessages(messages) {
+            	var messageContainer = $('#message-container');
+  
+	           	  for (var i = messages.length-1; i >=0; i--) {
+					var message = messages[i];
+	           		var sender = message.sender;
+	           		
+	                if(sender=="[[${session.username}]]")
+	               	{
+	                	var messageDiv = $('<div class="from_me"></div>');
+	               	}else{var messageDiv = $('<div class="from_others"></div>');}
+	                    
+	           	    var messageHtml = "<b>";
+	           	    messageHtml += message.sender + ' : ' + message.content;
+	           	    messageHtml += "</b>";
+	           	    messageDiv.append(messageHtml);
+	           	    messageContainer.append(messageDiv);
+	           	  }
+            }
+            
+            
             
 
             $('#send-button').click(function() {
@@ -62,6 +107,12 @@
 
                 stompClient.send("/app/chat/"+roomId, {}, JSON.stringify(message));
                 messageInput.val("");
+            });
+            
+            $(window).scroll(function() {
+                if ($(window).scrollTop() == 0) {
+                  loadMessages(currentPage + 1);
+                }
             });
         });
     </script>

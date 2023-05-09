@@ -56,7 +56,7 @@
          ON i.gid=f.gid WHERE i.gid=#{gid}
   	 </select>
   	 
-  	 <select id="findname">
+  	 <select id="findname" resultType="String">
   	 	SELECT i.name FROM items i INNER JOIN chatroom cr 
   	 	ON i.gid=cr.gid
   	 	WHERE cr.roomid =#{roomId}  
