@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Shopping Mall List</title>
-    <link rel="stylesheet" href="/css/board_list.css">
-  </head>
-  <body>
-    <th:block th:include="@{/board/header.html}"></th:block>
-    <div class="head-title">
-      <h2>중고거래 게시판</h2>
-    </div>
-    <div class="upper">
-      <a href="/board/upload" class='upload'>내 물건 팔기
-      </a>
-    </div>
-    <div class="container">
-      <!-- Shopping mall item with thumbnail -->
+<head>
+  <title>Shopping Mall List</title>
+  <link rel="stylesheet" href="/css/board_list.css">
+</head>
+ <body>
+   <th:block th:include="@{/board/header.html}"></th:block>
+   <div class="head-title">
+     <h2>중고거래 게시판</h2>
+   </div>
+   <div class="upper">
+     <a href="/board/upload" class='upload'>내 물건 팔기
+     </a>
+   </div>
+   <div class="container">
+     <!-- Shopping mall item with thumbnail -->
       <div class="items" th:each="item:${itemList}">
         <a class="item-link" th:href="'/board/item?gid='+${item.gid}">
         <img th:src="'/files/'+${item.fileList[0].fname}" alt="Thumbnail" class="thumbnail">
         </a>
         <h3>[[${item.name}]]</h3>
-        <p>[[${item.price}]]원</p>
-        <p>[[${item.seller}]]</p>
-        
-      </div>
-      <!-- Add more shopping mall items here -->
-      
-    </div>
-  </body>
+        <div id="numberElement" th:text="${item.price}+원"></div>
+       <p>[[${item.seller}]]</p>
+     </div>
+   </div>
+ </body>
 </html>

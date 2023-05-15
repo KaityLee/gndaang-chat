@@ -55,7 +55,7 @@ public class SecurityController {
 	}
 	
 	
-	@GetMapping("/signup")
+	@GetMapping("/register")
 	public String registerForm()
 	{
 		return "board/RegisterForm";

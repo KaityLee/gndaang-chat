@@ -11,8 +11,8 @@ function signUp()
 	var Data = $('#regForm').serialize();
 	
 	$.ajax({
-			url : '/login/signup',	//주소확인할것
-			method : 'post',	//맵핑확인할것
+			url : '/login/signup',	
+			method : 'post',	
 			data : Data,  											
 			cache : false,		
 			dataType:'json',                      
